@@ -1,9 +1,24 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import mongoose from 'mongoose';
+
+// at top of server.js
+import apiRouter from './router';
+
+// REGISTER OUR ROUTES -------------------------------
+// all of our routes will be prefixed with /api
+
+
+// DB Setup
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/blog';
+mongoose.connect(mongoURI);
+// set mongoose promises to es6 default
+mongoose.Promise = global.Promise;
 
 // initialize
 const app = express();
+app.use('/api', apiRouter);
 
 // enable/disable cross origin resource sharing if necessary
 app.use(cors());
