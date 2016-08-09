@@ -2,8 +2,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
-
-// at top of server.js
 import apiRouter from './router';
 
 // REGISTER OUR ROUTES -------------------------------
@@ -18,7 +16,7 @@ mongoose.Promise = global.Promise;
 
 // initialize
 const app = express();
-app.use('/api', apiRouter);
+
 
 // enable/disable cross origin resource sharing if necessary
 app.use(cors());
@@ -26,6 +24,8 @@ app.use(cors());
 // enable json message body for posting data to API
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use('/api', apiRouter);
 
 
 // default index route
