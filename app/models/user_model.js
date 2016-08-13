@@ -7,6 +7,10 @@ const UserSchema = new Schema({
   password: String,
 });
 
+UserSchema.set('toJSON', {
+  virtuals: true,
+});
+
 
 UserSchema.pre('save', (next) => {
   const user = this;
@@ -36,10 +40,6 @@ UserSchema.methods.comparePassword = function comparePassword(candidatePassword,
 
 
 // create model class
-const UserModel = mongoose.model('Post', UserSchema);
+const UserModel = mongoose.model('User', UserSchema);
 
 export default UserModel;
-
-UserSchema.set('toJSON', {
-  virtuals: true,
-});

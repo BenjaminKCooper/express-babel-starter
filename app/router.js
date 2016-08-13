@@ -9,22 +9,23 @@ router.get('/', (req, res) => {
   res.json({ message: 'welcome to our blog api!' });
 });
 
-router.post('/signin', requireSignin, UserController.signin);
-router.post('/signup', UserController.signup);
-router.post(requireAuth, Posts.createPost);
-router.post(requireAuth, Posts.updatePost);
-router.post(requireAuth, Posts.getPost);
-router.post(requireAuth, Posts.getPosts);
-router.post(requireAuth, Posts.deletePost);
+// router.post(requireAuth, Posts.createPost);
+// router.post(requireAuth, Posts.updatePost);
+// router.post(requireAuth, Posts.getPost);
+// router.post(requireAuth, Posts.getPosts);
+// router.post(requireAuth, Posts.deletePost);
 
 router.route('/posts/:id')
-  .put(Posts.updatePost)
+  .put(requireAuth, Posts.updatePost)
   .get(Posts.getPost)
-  .delete(Posts.deletePost);
-
+  .delete(requireAuth, Posts.deletePost);
 
 router.route('/posts')
-  .post(Posts.createPost)
+  .post(requireAuth, Posts.createPost)
   .get(Posts.getPosts);
+
+
+router.post('/signin', requireSignin, UserController.signin);
+router.post('/signup', UserController.signup);
 
 export default router;
