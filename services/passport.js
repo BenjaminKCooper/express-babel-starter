@@ -5,7 +5,9 @@ import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 
 // and import User and your config with the secret
 import User from '../app/models/user_model';
-import config from '../config';
+// import config from '../config';
+import dotenv from 'dotenv';
+dotenv.config({ silent: true });
 
 
 // options for local strategy, we'll use email AS the username
@@ -17,7 +19,7 @@ const localOptions = { usernameField: 'email' };
 // so passport can find it there
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-  secretOrKey: config.secret,
+  secretOrKey: process.env.API_SECRET,
 };
 
 

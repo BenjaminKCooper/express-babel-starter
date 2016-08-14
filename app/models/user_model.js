@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt-nodejs';
 
 // create a schema for posts with a field
 const UserSchema = new Schema({
+  fullName: String,
   email: { type: String, unique: true, lowercase: true },
   password: String,
 });
@@ -12,7 +13,7 @@ UserSchema.set('toJSON', {
 });
 
 
-UserSchema.pre('save', (next) => {
+UserSchema.pre('save', function beforeyYourModelSave(next) {
   const user = this;
 
   // generate a salt then run callback
@@ -25,7 +26,7 @@ UserSchema.pre('save', (next) => {
 
     // overwrite plain text password with encrypted password
       user.password = hash;
-      if (!user.isModified('password')) return next();
+      return next();  // if (!user.isModified('password'))
     });
   });
 });

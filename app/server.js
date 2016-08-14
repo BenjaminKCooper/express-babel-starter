@@ -17,7 +17,6 @@ mongoose.Promise = global.Promise;
 // initialize
 const app = express();
 
-
 // enable/disable cross origin resource sharing if necessary
 app.use(cors());
 
