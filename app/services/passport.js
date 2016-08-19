@@ -4,7 +4,7 @@ import LocalStrategy from 'passport-local';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 
 // and import User and your config with the secret
-import User from '../app/models/user_model';
+import User from '../models/user_model';
 // import config from '../config';
 import dotenv from 'dotenv';
 dotenv.config({ silent: true });
